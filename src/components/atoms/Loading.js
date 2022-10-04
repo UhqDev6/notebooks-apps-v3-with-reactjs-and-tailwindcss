@@ -1,13 +1,13 @@
 import { LocaleConsumer } from "../../contexts/LocaleContext";
 
-const NoteEmpty = () => {
+const Loading = () => {
     return(
         <LocaleConsumer>
             {({locale}) => {
                 return(
                     <>
-                        <div className="flex justify-center">
-                            <p className="text-center text-md text-slate-500">{locale === 'id' ? 'Tida ada catatan...' : 'No records ...'}</p>
+                        <div className="text-center">
+                            <p className="text-2xl dark:text-slate-400 -mt-4">{locale === 'id' ? 'Memuat...' : 'Loading...'}</p>
                         </div>
                     </>
                 );
@@ -16,4 +16,5 @@ const NoteEmpty = () => {
     );
 }
 
-export default NoteEmpty;
+
+export default Loading;

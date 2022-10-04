@@ -1,12 +1,15 @@
-import React from "react";
-import {useParams } from "react-router-dom";
-import Title from "../components/atoms/Title";
+import React, { useEffect, useState } from "react";
+import {useNavigate, useParams } from "react-router-dom";
+import Loading from "../components/atoms/Loading";
 import DetailItem from "../components/molecules/DetailItem";
-import Navigation from "../components/molecules/Navigation";
-import {archiveNote, getNote, unarchiveNote } from "../utils/local-data";
+import { LocaleConsumer } from "../contexts/LocaleContext";
+import {archiveNote, getNote, unarchiveNote } from "../utils/network-data";
 
-const DetailPageWrapper = () => {
+const DetailPage = () => {
+    const[note, setNoteDetail] = useState('');
     const {id} = useParams();
+    const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate();
 
     const onArchiveHandler = (id) => {
         archiveNote(id);
@@ -16,47 +19,39 @@ const DetailPageWrapper = () => {
         unarchiveNote(id);
     }
 
-    return <DetailPage id={(id)} isArchive={onArchiveHandler} isUnArchive={onUnArchiveHandler}/>
+    useEffect(() => {
+        const getNoteDetail = async () => {
+        const {data} = await getNote(id);
+        setNoteDetail(data);
+        setIsLoading(false);
+        }
+        getNoteDetail();
+    },[id]);
 
+    if(note === null){
+        navigate('/404');
+    }
+    return (
+        <LocaleConsumer>
+            {({locale}) => {
+                return isLoading  ? (
+                    <div className="mt-24">
+                        <Loading/>
+                    </div>
+                ) : (
+                    <>
+                        <div className="flex justify-left">
+                        <h1 className="mt-10 text-2xl font-bold text-purple-400 ml-14">{locale === 'id' ? 'Halaman Detail' :'Detail Page' }</h1>
+                        </div>
+                        <article className="flex justify-center">
+                            <DetailItem note={note} isArchive={onArchiveHandler} isUnArchive={onUnArchiveHandler}/>
+                        </article>
+                    </>
+                );
+            }}
+        </LocaleConsumer>
+
+    );
 }
 
-class DetailPage extends React.Component{
-    constructor(props){
-        super(props);
-        
-        this.state = {
-            note : getNote(props.id),
-        }
-    }
-
-    render() {
-        if(typeof this.state.note === 'undefined'){
-            return(
-                <>
-                    <h3>Note is not found !</h3>
-                </>
-            );
-        }
-        return(
-            <>
-                <div className="mt-6 sm:mt-10 flex justify-center space-x-6 text-md">
-                    <div>
-                        <Title/>
-                    </div>
-                    <div>
-                        <Navigation/>
-                    </div>
-                </div>
-                <div className="flex justify-left">
-                <h1 className="mt-10 text-2xl font-bold text-purple-400 ml-14">Detail Page</h1>
-                </div>
-                <article className="flex justify-center">
-                    <DetailItem {...this.state.note} isArchive={archiveNote} isUnArchive={unarchiveNote}/>
-                
-                </article>
-            </>
-        );
-    }
-}
-
-export default DetailPageWrapper;
+export default DetailPage;

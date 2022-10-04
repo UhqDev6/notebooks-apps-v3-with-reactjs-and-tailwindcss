@@ -1,87 +1,78 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import NoteEmpty from "../components/atoms/NoteEmpty";
 import List from "../components/molecules/List";
-import {deleteNote, getArchivedNotes } from "../utils/local-data";
+import {deleteNote, getArchivedNotes } from "../utils/network-data";
 import Search from "../components/atoms/Search";
-import Title from "../components/atoms/Title";
-import Navigation from "../components/molecules/Navigation";
+import { LocaleConsumer } from "../contexts/LocaleContext";
+import Loading from "../components/atoms/Loading";
 
-const ArchiveWrapper = () => {
+
+const Archive = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const search = searchParams.get('search');
-    const changeSearchParams = search => {
-        setSearchParams({search})
+    const [archivedNotes, setArchivedNotes] = useState([]);
+    const [search, setSearch] = useState(() => {
+        return searchParams.get('search') || '';
+    });
+    const [isLoading, setIsLoading] = useState(true);
+
+    const getArchivedNotebooks = async () => {
+        const { data } = await getArchivedNotes();
+        setArchivedNotes(data);
+        setIsLoading(false);
+    };
+
+    const onSearchChangeHandler = (search) => {
+        setSearch(search);
+        setSearchParams({search});
     }
-    return <Archive defaultSearch={search} searchChange={changeSearchParams}/>
-}
 
-class Archive extends React.Component {
-    constructor(props) {
-        super(props);
+    const onDeleteHandler = async (id) => {
+        await deleteNote(id);
+        getArchivedNotebooks();
+    }
 
-        this.state = {
-            archivedNotes : getArchivedNotes(),
-            search: props.defaultSearch || '',
+    const filteredNotebooks = archivedNotes.filter((archivedNote) => {
+            return archivedNote.title.toLowerCase().includes(search.toLowerCase());
         }
+    );  
 
-        this.onSearchEventHandler = this.onSearchEventHandler.bind(this);
-        this.onDeleteHandler = this.onDeleteHandler.bind(this);
-    }
+    useEffect(() => {
+        getArchivedNotebooks();
+    },[]);
 
-    onSearchEventHandler = (search) => {
-        this.setState(()=> {
-            return {
-                search,
-            }
-        });
-        this.props.searchChange(search);
-    }
+    return(
+        <LocaleConsumer>
+            {({locale}) => {
+                return(
+                    <>
+                        <header className="mt-6 sm:mt-10 flex justify-center space-x-6 text-md">
+                        <div>
+                            <Search locale={locale} search={search} searchChange={onSearchChangeHandler}/>
+                        </div>
+                        </header>
+                        <div className="flex justify-left">
+                            <h1 className="mt-10 text-2xl font-bold text-purple-400 ml-14">{locale === 'id' ? 'Halaman Arsip' : 'Archive Page' }</h1>
+                        </div>
+                        <div className="mt-10">
+                        { isLoading ? (
+                            <Loading/>
+                        ) : archivedNotes.length > 0 ? 
+                            
+                            <List notes={filteredNotebooks}  onDelete={onDeleteHandler}/>
+                            
+                            :
 
-    onDeleteHandler = (id) => {
-        deleteNote(id);
-        this.setState(()=> {
-            return {
-                archivedNotes : getArchivedNotes(),
-            }
-        });
-    }
-    render(){
-        const notes = this.state.archivedNotes.filter(note => {
-            return note.title.toLowerCase().includes(
-                this.state.search.toLowerCase()
-            );
-        });
-        return(
-            <>
-                <header className="mt-6 sm:mt-10 flex justify-center space-x-6 text-md">
-                <div>
-                    <Title/>
-                </div>
-                <div>
-                    <Search search={this.state.search} searchChange={this.onSearchEventHandler}/>
-                </div>
-                <div>
-                    <Navigation/>
-                </div>
-                </header>
-                <div className="flex justify-left">
-                    <h1 className="mt-10 text-2xl font-bold text-purple-400 ml-14">Archive Page</h1>
-                </div>
-                <div className="mt-10">
-                {this.state.archivedNotes.length > 0 ? 
-                    
-                    <List notes={notes}  onDelete={this.onDeleteHandler}/>
-                    
-                    :
+                            <NoteEmpty/>
+                        
+                        } 
+                        </div>
+                    </>
+                );
+            }}
+        </LocaleConsumer>
 
-                    <NoteEmpty/>
-                
-                } 
-                </div>
-            </>
-        );
-    }
+    );
 }
 
-export default ArchiveWrapper;
+export default Archive;

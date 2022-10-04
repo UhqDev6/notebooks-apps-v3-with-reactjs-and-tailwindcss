@@ -3,7 +3,7 @@ const ButtonAdd = ({children}) => {
         <>
             <button
                 type="submit"
-                className="btn-primary w-48 mt-12" 
+                className="btn-primary w-full mt-12" 
             >
                 {children}
             </button>

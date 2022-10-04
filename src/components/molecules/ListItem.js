@@ -1,22 +1,18 @@
 import  ListItemBody  from "./ListItemBody";
 import PropTypes from "prop-types";
 
-const ListItem = ({id , title, body, createdAt, onDelete, archived}) => {
+const ListItem = ({notes, onDelete}) => {
     return(
         <>
             <div>
-                <ListItemBody id={id} title={title} createdAt={createdAt} body={body} onDelete={onDelete} archived={archived}/>
+                <ListItemBody notes={notes} onDelete={onDelete} />
             </div>
         </>
     );
 }
 ListItem.propTypes = {
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    body: PropTypes.string.isRequired,
-    createdAt: PropTypes.string.isRequired,
+    notes: PropTypes.object.isRequired,
     onDelete: PropTypes.func.isRequired,
-    archived: PropTypes.bool.isRequired,
 }
 
 export default ListItem;

@@ -9,7 +9,7 @@ const List = ({notes, onDelete}) => {
                         key={note.id}
                         id={note.id}
                         onDelete={onDelete}
-                        {...note}
+                        notes={note}
                     />
                 ))
             }
