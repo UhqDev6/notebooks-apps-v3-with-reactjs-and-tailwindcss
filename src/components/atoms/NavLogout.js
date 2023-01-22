@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { FaSignOutAlt } from "react-icons/fa";
 const NavLogout = ({logout, name}) => {
     return(
@@ -8,6 +9,11 @@ const NavLogout = ({logout, name}) => {
             </div>
         </>
     );
+}
+
+NavLogout.propTypes = {
+    logout: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
 }
 
 export default NavLogout;

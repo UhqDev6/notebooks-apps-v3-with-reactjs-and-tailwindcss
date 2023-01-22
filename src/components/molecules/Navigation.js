@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Navadd from "../atoms/Navadd";
 import Navarchive from "../atoms/Navarchive";
 import Navhome from "../atoms/Navhome";
@@ -18,6 +19,11 @@ const Navigation = ({logout, name}) => {
             </nav>
         </>
     );
+}
+
+Navigation.propTypes = {
+    logout: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
 }
 
 export default Navigation;

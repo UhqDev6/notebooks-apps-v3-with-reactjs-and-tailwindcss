@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import NoteEmpty from "../components/atoms/NoteEmpty";
 import List from "../components/molecules/List";
@@ -41,6 +41,8 @@ const Archive = () => {
         getArchivedNotebooks();
     },[]);
 
+ 
+
     return(
         <LocaleConsumer>
             {({locale}) => {
@@ -57,7 +59,8 @@ const Archive = () => {
                         <div className="mt-10">
                         { isLoading ? (
                             <Loading/>
-                        ) : archivedNotes.length > 0 ? 
+                        ) : archivedNotes?.length > 0 ? 
+                            
                             
                             <List notes={filteredNotebooks}  onDelete={onDeleteHandler}/>
                             

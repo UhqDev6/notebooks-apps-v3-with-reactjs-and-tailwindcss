@@ -21,6 +21,7 @@ const Search = ({locale, search, searchChange}) => {
 Search.propTypes = {
     search: PropTypes.string.isRequired,
     searchChange: PropTypes.func.isRequired,
+    locale: PropTypes.string.isRequired,
 }
 
 export default Search;

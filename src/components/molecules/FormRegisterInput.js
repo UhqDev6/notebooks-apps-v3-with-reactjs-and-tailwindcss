@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import { LocaleConsumer } from "../../contexts/LocaleContext";
 import useInput from "../../hooks/useInput";
@@ -12,7 +13,7 @@ const FormRegisterInput = ({register}) => {
     const onSubmitHandler = (event) => {
         event.preventDefault();
         if(password !== confirmPassword){
-           return alert("Password dont match");
+            return alert("Password dont match");
         } else {
             return register({name, email, password});
         }
@@ -77,7 +78,7 @@ const FormRegisterInput = ({register}) => {
                             </div>
                             <div className="md:flex md:items-center mb-6 mt-10">
                                 <div className="md:w-1/3">
-                                    <label className="block text-gray-500 dark:text-slate-400 font-bold md:text-left mb-1 md:mb-0 pr-4">Confirm Password</label>
+                                    <label className="block text-gray-500 dark:text-slate-400 font-bold md:text-left mb-1 md:mb-0 pr-4">{locale === 'id' ? 'Penyusuaian Sandi' : 'Confirm Password' }</label>
                                 </div>
             
                                 <div className="w-full">
@@ -110,6 +111,11 @@ const FormRegisterInput = ({register}) => {
             </LocaleConsumer>
         </>
     );
+}
+
+
+FormRegisterInput.propTypes = {
+    register: PropTypes.func.isRequired,
 }
 
 export default FormRegisterInput;

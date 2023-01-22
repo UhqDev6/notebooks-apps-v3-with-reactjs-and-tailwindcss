@@ -8,15 +8,18 @@ import {archiveNote, getNote, unarchiveNote } from "../utils/network-data";
 const DetailPage = () => {
     const[note, setNoteDetail] = useState('');
     const {id} = useParams();
+
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
-    const onArchiveHandler = (id) => {
-        archiveNote(id);
+    const onArchiveHandler = async (id) => {
+        await archiveNote(id);
+        navigate('/');
     }
 
-    const onUnArchiveHandler = (id) => {
-        unarchiveNote(id);
+    const onUnArchiveHandler = async (id) => {
+        await unarchiveNote(id);
+        navigate('/');
     }
 
     useEffect(() => {
@@ -27,6 +30,8 @@ const DetailPage = () => {
         }
         getNoteDetail();
     },[id]);
+
+    console.log(note);
 
     if(note === null){
         navigate('/404');

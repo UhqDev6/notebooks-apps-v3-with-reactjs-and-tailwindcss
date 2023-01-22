@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import FormLoginInput from "../components/molecules/FormLoginInput";
 import { login } from "../utils/network-data";
 
@@ -11,11 +12,17 @@ const LoginPage = ({loginSuccess}) => {
     }
     return(
         <>
-            <section className="flex justify-center mt-10">
+            <section className="flex justify-center mx-auto mt-10">
                 <FormLoginInput login={onLogin}/>
             </section>
         </>
     );
 }
+
+
+LoginPage.propTypes = {
+    loginSuccess: PropTypes.func.isRequired,
+}
+
 
 export default LoginPage;

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 const ButtonRegister = ({children}) => {
     return(
         <>
@@ -7,5 +8,10 @@ const ButtonRegister = ({children}) => {
         </>
     );
 }
+
+ButtonRegister.propTypes = {
+    children: PropTypes.string.isRequired,
+}
+
 
 export default ButtonRegister;

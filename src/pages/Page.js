@@ -69,8 +69,6 @@ const Page = () => {
     },[theme]);
 
     useEffect(() => {
-        // document.documentElement.setAttribute('data-theme', theme);
-        // localStorage.setItem('theme', theme);
         const root = document.querySelector('html')
         root.removeAttribute('class');
         root.classList.add(theme);

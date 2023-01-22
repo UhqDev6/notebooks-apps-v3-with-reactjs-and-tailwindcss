@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import { LocaleConsumer } from "../../contexts/LocaleContext";
 import useInput from "../../hooks/useInput";
@@ -73,6 +74,11 @@ const FormLoginInput = ({login}) => {
             </LocaleConsumer>
         </>
     );
+}
+
+
+FormLoginInput.propTypes = {
+    login: PropTypes.func.isRequired,
 }
 
 export default FormLoginInput;

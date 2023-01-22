@@ -1,19 +1,11 @@
 
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
 import { LocaleConsumer } from '../../contexts/LocaleContext';
 import { showFormattedDate } from '../../utils';
 import ButtonArchive from "../atoms/ButtonArchive";
 import ButtonUnArchive from "../atoms/ButtonUnArchive";
-import Loading from '../atoms/Loading';
-
 
 const DetailItem = ({note, isArchive, isUnArchive }) => {
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        setIsLoading(false);
-    },[]);
 
     return(
         <LocaleConsumer>
@@ -30,27 +22,21 @@ const DetailItem = ({note, isArchive, isUnArchive }) => {
                         </div>
                         {
                             note.archived === false ?
-
-                            isLoading ? (
-                                <Loading/>
-                            ) : (
                                 <div>
                                 <ButtonArchive id={note.id} isArchive={isArchive}>
                                     {locale === 'id' ? 'Arsipkan' : 'Archived'}
                                 </ButtonArchive>
                                 </div>
-                            )
+                            
 
                             :
-                            isLoading ? (
-                                <Loading/>
-                            ) : (
+
                                 <div>
                                     <ButtonUnArchive id={note.id} isUnArchive={isUnArchive}>
                                         {locale === 'id' ? 'Pindahkan' : 'Moved'}
                                     </ButtonUnArchive>
                                 </div>
-                            )
+                            
                         }
 
                         </div>

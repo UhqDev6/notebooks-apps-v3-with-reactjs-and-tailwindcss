@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { showFormattedDate } from "../../utils";
 
 const ListItemBody = ({notes, onDelete}) => {
+
     return(
         <>
             <div className="flex mb-4 px-10 py-8 justify-items-center">

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 const ButtonAdd = ({children}) => {
     return(
         <>
@@ -9,6 +10,10 @@ const ButtonAdd = ({children}) => {
             </button>
         </>
     );
+}
+
+ButtonAdd.propTypes = {
+    children: PropTypes.string.isRequired,
 }
 
 export default ButtonAdd;

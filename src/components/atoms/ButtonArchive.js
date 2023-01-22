@@ -1,15 +1,19 @@
-import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 
 const ButtonArchive = ({id,isArchive, children}) => {
-    const navigate = useNavigate();
-    return(
+    const [, setIsLoading] = useState(true);
+    useEffect(() => {
+        setIsLoading(false);
+    },[]);
+
+    return (
         <>
+
             <button
-            onClick={() => 
+            onClick={ () => 
                 {
                     isArchive(id);
-                    navigate('/');
                 }
             }
                 className="btn-archives"
@@ -17,12 +21,13 @@ const ButtonArchive = ({id,isArchive, children}) => {
                 {children}
             </button>
         </>
-    );
+    )
 }
 
 ButtonArchive.propTypes = {
     id: PropTypes.string.isRequired,
     isArchive: PropTypes.func.isRequired,
+    children: PropTypes.string.isRequired,
 }
 
 export default ButtonArchive;
