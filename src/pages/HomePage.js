@@ -60,7 +60,7 @@ const HomePage = () => {
                         <h1 className="mt-10 text-2xl font-bold text-purple-400 ml-14">{locale === 'id' ? 'Halaman Beranda' : 'Home Page' }</h1>
                         </div>
                         <main>
-                            <article className="justify-center mt-10">
+                            <article className="justify-center sm:mt-10">
                             { isLoading ? (
                                 <Loading/>
                             ) : notebooks.length > 0 ? 
@@ -71,8 +71,7 @@ const HomePage = () => {
 
                                 <NoteEmpty/>
                             
-                            } 
-                    
+                            }
                             </article>
                         </main>
                     </>

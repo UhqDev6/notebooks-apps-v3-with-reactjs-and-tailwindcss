@@ -99,11 +99,11 @@ const Page = () => {
             <ThemeProvider value={themeContext}>
             <>
             <div className="max-w-full h-[100vh] -mt-10 dark:bg-slate-700 w-full ">
-            <div className="mt-6 sm:mt-10 flex justify-center space-x-6 text-md">
+            <div className="mt-6 sm:mt-10 sm:flex justify-center space-x-6 text-md">
                     <div className='mt-10'>
                         <Title/>
                     </div>
-                    <div className="flex pt-1.5 mt-10 bg-purple-100 rounded-3xl w-48 justify-center">
+                    <div className="flex sm:mt-12 mt-6 sm:bg-purple-100 rounded-3xl w-48 justify-center right-0 absolute sm:relative">
                         <Navlanguage/>
                         <NavTheme/>
                     </div>
@@ -124,7 +124,7 @@ const Page = () => {
             <ThemeProvider value={themeContext}>
             <>
             <div className="max-w-full h-[100vh] -mt-10 dark:bg-slate-700 w-full ">
-            <header className="mt-6  sm:mt-10 flex justify-center space-x-6 text-md">
+            <header className="mt-6  sm:mt-10 sm:flex justify-center space-x-6 text-md">
             <div className='mt-10'>
                 <Title/>
             </div>

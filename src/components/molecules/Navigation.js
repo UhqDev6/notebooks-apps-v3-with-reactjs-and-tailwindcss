@@ -8,8 +8,8 @@ import NavTheme from "../atoms/NavTheme";
 
 const Navigation = ({logout, name}) => {
     return(
-        <>
-            <nav className="flex mt-1 bg-purple-100 rounded-3xl w-96 justify-center">
+        <div className='flex ml-6'>
+            <nav className="flex mt-1 bg-purple-100 rounded-3xl sm:w-96 w-80 justify-center">
                 <Navhome/>
                 <Navadd/>
                 <Navarchive/>
@@ -17,7 +17,7 @@ const Navigation = ({logout, name}) => {
                 <NavTheme/>
                 <NavLogout logout={logout} name={name}/>
             </nav>
-        </>
+        </div>
     );
 }
 

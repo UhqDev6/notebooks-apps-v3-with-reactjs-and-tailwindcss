@@ -24,7 +24,7 @@ const FormRegisterInput = ({register}) => {
             <LocaleConsumer>
                 {({locale}) => {
                     return(
-                        <form className="w-full max-w-lg mt-12" onSubmit={onSubmitHandler}>
+                        <form className="sm:max-w-lg w-2/3 mt-12" onSubmit={onSubmitHandler}>
                             <div className="md:flex md:items-center mb-6 justify-center text-left ">
                                 <h2 className="text-2xl font-bold w-full text-purple-400 -mt-16">{locale === 'id' ? 'Halaman Pendaftaran' : 'Register Page' }</h2>
                             </div>
@@ -76,7 +76,7 @@ const FormRegisterInput = ({register}) => {
                                     ></input>
                                 </div>
                             </div>
-                            <div className="md:flex md:items-center mb-6 mt-10">
+                            <div className="md:flex md:items-center sm:mb-6 -mb-4 mt-10">
                                 <div className="md:w-1/3">
                                     <label className="block text-gray-500 dark:text-slate-400 font-bold md:text-left mb-1 md:mb-0 pr-4">{locale === 'id' ? 'Penyusuaian Sandi' : 'Confirm Password' }</label>
                                 </div>
@@ -93,7 +93,7 @@ const FormRegisterInput = ({register}) => {
                                 </div>
                             </div>
 
-                            <div className="md:flex md:items-center mb-6 justify-center">
+                            <div className="md:flex md:items-center sm:mb-6 -mb-8 justify-center">
                                 <ButtonRegister>
                                 {locale === 'id' ? 'Daftar' : 'Register' }
                                 </ButtonRegister>
