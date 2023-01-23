@@ -18,7 +18,7 @@ const Form = ({addNote}) => {
             {({locale}) => {
                 return(
                     <>
-                        <form className="w-full max-w-lg mt-12" onSubmit={onSubmitHandler}>
+                        <form className="w-2/3 sm:max-w-lg mt-12" onSubmit={onSubmitHandler}>
                             <div className="md:flex md:items-center mb-6 justify-center text-left ">
                                 <h2 className="text-2xl font-bold w-full text-purple-400 -mt-16">{locale === 'id' ? 'Tambahkan Catatan' : 'Create Notes' }</h2>
                             </div>
